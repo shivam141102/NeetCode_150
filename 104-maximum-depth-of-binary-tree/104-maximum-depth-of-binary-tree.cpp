@@ -9,12 +9,38 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+//DFS
+// class Solution {
+// public:
+//     int maxDepth(TreeNode* root) {
+//         if(root==NULL)
+//             return 0;
+        
+//         return 1+max(maxDepth(root->left),maxDepth(root->right));
+//     }
+// };
+
+//BFS
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if(root==NULL)
-            return 0;
+        if (root==NULL) return 0; 
+        queue<TreeNode*> q;
+        q.push(root);
+        int depth=0;
         
-        return 1+max(maxDepth(root->left),maxDepth(root->right));
+        while (!q.empty()) {
+            ++depth;
+            int s=q.size();
+            for (int i=0; i<s; i++) {
+                TreeNode* front=q.front();
+                q.pop();
+                
+                if (front->left) q.push(front->left);
+                if (front->right) q.push(front->right);
+            }
+        }
+    return depth;
     }
 };

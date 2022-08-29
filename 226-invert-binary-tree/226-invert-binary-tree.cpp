@@ -10,6 +10,26 @@
  * };
  */
 //Simply swaping left and right node and calling inverttree function on root->left and root->right
+//DFS
+// Time: O(n)
+// Space: O(n)
+
+// class Solution {
+// public:
+//     TreeNode* invertTree(TreeNode* root) {
+//         if(root==NULL)
+//             return root;
+//         TreeNode *temp=root->left;
+//         root->left=root->right;
+//         root->right=temp;
+        
+//         invertTree(root->left);
+//         invertTree(root->right);
+//         return root;
+//     }
+// };
+
+//BFS
 // Time: O(n)
 // Space: O(n)
 
@@ -18,12 +38,21 @@ public:
     TreeNode* invertTree(TreeNode* root) {
         if(root==NULL)
             return root;
-        TreeNode *temp=root->left;
-        root->left=root->right;
-        root->right=temp;
         
-        invertTree(root->left);
-        invertTree(root->right);
+        queue<TreeNode*> q;
+        q.push(root);
+        
+        while(!q.empty()){
+            TreeNode *temp=q.front(); 
+            q.pop();
+
+            swap(temp->left, temp->right);
+            if(temp->left)
+                q.push(temp->left);
+            if(temp->right)
+                q.push(temp->right);
+            
+        }
         return root;
     }
 };

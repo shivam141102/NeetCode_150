@@ -19,6 +19,9 @@
 //     TreeNode* invertTree(TreeNode* root) {
 //         if(root==NULL)
 //             return root;
+
+//         SWAP
+
 //         TreeNode *temp=root->left;
 //         root->left=root->right;
 //         root->right=temp;
@@ -46,7 +49,13 @@ public:
             TreeNode *temp=q.front(); 
             q.pop();
 
-            swap(temp->left, temp->right);
+            //SWAP
+            TreeNode *node=temp->left;
+            temp->left=temp->right;
+            temp->right=node;
+            
+            //PUSH LEFT TO QUEUE IF PRESENT 
+            //PUSH RIGHT TO QUEUE IF PRESENT 
             if(temp->left)
                 q.push(temp->left);
             if(temp->right)
